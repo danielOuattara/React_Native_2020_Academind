@@ -19,5 +19,6 @@ export default function GoalsList(props) {
 const styles = StyleSheet.create({
   goalsContainer: {
     flex: 5,
+    marginVertical: 10
   },
 });

@@ -7,7 +7,7 @@ export default function GoalItem(props) {
       <Pressable
         android_ripple={{ color: "#320073" }}
         onPress={() => props.deleteGoalHandler(props.item.key)}
-        style={({pressed}) => pressed & styles.pressedItem}
+        style={({ pressed }) => pressed & styles.pressedItem}
       >
         <Text style={styles.goalItem}>{props.item.title}</Text>
       </Pressable>
@@ -17,13 +17,13 @@ export default function GoalItem(props) {
 
 const styles = StyleSheet.create({
   goalItemView: {
-    margin: 8,
+    marginVertical: 4,
     borderRadius: 6,
     backgroundColor: "#6000de",
     color: "white",
   },
-  pressedItem:{
-    opacity: 0.5
+  pressedItem: {
+    opacity: 0.5,
   },
   goalItem: {
     padding: 8,

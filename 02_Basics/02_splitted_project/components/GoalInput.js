@@ -1,4 +1,4 @@
-import { StyleSheet, View, Button, TextInput } from "react-native";
+import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
 import React, { useState } from "react";
 
 export default function GoalInput(props) {
@@ -12,38 +12,54 @@ export default function GoalInput(props) {
     }
   }
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Your Goal Course"
-        onChangeText={setEnteredGoalText}
-        value={enteredGoalText}
-      />
-      <Button
-        title="add a goal"
-        onPress={() => goalInputHandler(enteredGoalText)}
-      />
-    </View>
+    <Modal visible={props.modalIsVisible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your Goal Course"
+          onChangeText={setEnteredGoalText}
+          value={enteredGoalText}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button
+              title="add a goal"
+              onPress={() => goalInputHandler(enteredGoalText)}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={() => props.showAddGoalModal(false)} />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "90%",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     borderBottomWidth: 1,
-    borderBottomColor: "#CCC",
+    borderBottomColor: "#CCCCCC",
   },
   textInput: {
     borderWidth: 1,
     borderColor: "#bbb",
-    width: "80%",
+    width: "90%",
     marginRight: 8,
     paddingHorizontal: 8,
     paddingVertical: 3,
+  },
+
+  buttonContainer: {
+    flexDirection: "row",
+  },
+
+  button: {
+    width: "35%",
+    marginHorizontal: 12,
+    marginVertical: 10,
   },
 });
