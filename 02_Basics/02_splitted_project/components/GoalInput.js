@@ -1,4 +1,11 @@
-import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Button,
+  TextInput,
+  Modal,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 
 export default function GoalInput(props) {
@@ -14,6 +21,10 @@ export default function GoalInput(props) {
   return (
     <Modal visible={props.modalIsVisible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          style={styles.image}
+          source={require("./../assets/images/goal.png")}
+        />
         <TextInput
           style={styles.textInput}
           placeholder="Your Goal Course"
@@ -23,12 +34,17 @@ export default function GoalInput(props) {
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button
-              title="add a goal"
-              onPress={() => goalInputHandler(enteredGoalText)}
+              title="Cancel"
+              onPress={() => props.showAddGoalModal(false)}
+              color="#f31282"
             />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={() => props.showAddGoalModal(false)} />
+            <Button
+              title="add a goal"
+              onPress={() => goalInputHandler(enteredGoalText)}
+              color="#5e0acc"
+            />
           </View>
         </View>
       </View>
@@ -41,16 +57,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCCCCC",
+    backgroundColor: "#311b6b",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#bbb",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
     width: "90%",
     marginRight: 8,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
+    padding: 12,
+    color: "#120438",
+    borderRadius: 8,
   },
 
   buttonContainer: {
@@ -60,6 +82,6 @@ const styles = StyleSheet.create({
   button: {
     width: "35%",
     marginHorizontal: 12,
-    marginVertical: 10,
+    marginVertical: 26,
   },
 });
