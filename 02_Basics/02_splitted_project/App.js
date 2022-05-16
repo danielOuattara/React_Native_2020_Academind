@@ -9,16 +9,11 @@ export default function App() {
   const [goals, setGoals] = useState([]);
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  function showAddGoalModal(bool) {
-    setModalIsVisible(bool);
-  }
-
   function addGoalHandler(title) {
     setGoals((previousState) => [
       ...previousState,
       { title, key: new Date().getTime().toString() },
     ]);
-    setModalIsVisible(false);
   }
 
   function deleteGoalHandler(key) {
@@ -34,12 +29,12 @@ export default function App() {
         <Button
           title="Add New Goal"
           color="#6000de"
-          onPress={() => showAddGoalModal(true)}
+          onPress={() => setModalIsVisible(true)}
         />
         <GoalInput
-          showAddGoalModal={showAddGoalModal}
-          addGoalHandler={addGoalHandler}
           modalIsVisible={modalIsVisible}
+          setModalIsVisible={setModalIsVisible}
+          addGoalHandler={addGoalHandler}
         />
 
         <GoalsList goals={goals} deleteGoalHandler={deleteGoalHandler} />

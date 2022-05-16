@@ -9,13 +9,13 @@ import {
 import React, { useState } from "react";
 
 export default function GoalInput(props) {
-  const [enteredGoalText, setEnteredGoalText] = useState("");
+  const [goalTitle, setGoalTitle] = useState("");
 
   function goalInputHandler(enteredText) {
-    if (enteredGoalText) {
-      setEnteredGoalText(enteredText);
-      props.addGoalHandler(enteredGoalText);
-      setEnteredGoalText("");
+    if (goalTitle) {
+      setGoalTitle(enteredText);
+      props.addGoalHandler(goalTitle);
+      setGoalTitle("");
     }
   }
   return (
@@ -27,22 +27,22 @@ export default function GoalInput(props) {
         />
         <TextInput
           style={styles.textInput}
-          placeholder="Your Goal Course"
-          onChangeText={setEnteredGoalText}
-          value={enteredGoalText}
+          placeholder="Enter a New Goal Course"
+          onChangeText={setGoalTitle}
+          value={goalTitle}
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button
-              title="Cancel"
-              onPress={() => props.showAddGoalModal(false)}
+              title="Go Back"
+              onPress={() => props.setModalIsVisible(false)}
               color="#f31282"
             />
           </View>
           <View style={styles.button}>
             <Button
               title="add a goal"
-              onPress={() => goalInputHandler(enteredGoalText)}
+              onPress={() => goalInputHandler(goalTitle)}
               color="#5e0acc"
             />
           </View>
