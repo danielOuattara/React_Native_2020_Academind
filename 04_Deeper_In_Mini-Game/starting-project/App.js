@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import StartGameScreen from "./screens/StartGameScreen";
+import { StyleSheet, ImageBackground } from "react-native";
+import { StartGameScreen } from "./screens";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function App() {
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    opacity: 0.4
-  }
+    opacity: 0.4,
+  },
 });

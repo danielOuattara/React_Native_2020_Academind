@@ -1,16 +1,20 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
-import React from "react";
-import PrimaryButton from "../components/PrimaryButton";
+// import * as React from 'react';
+import { PrimaryButton } from "../components";
 
 export default function StartGameScreen() {
   return (
     <View style={styles.inputContainer}>
+      <View style={styles.labelContainer}>
+        <Text style={styles.labelText}>Enter a number :</Text>
+      </View>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
         keyboardType="number-pad"
       />
-      <View style={styles.buttonContainer}>
+
+      <View style={styles.buttonsContainer}>
         <View style={styles.singleButtonContainer}>
           <PrimaryButton>Reset</PrimaryButton>
         </View>
@@ -24,38 +28,60 @@ export default function StartGameScreen() {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    // flex: 1,
-    padding: 16,
+    paddingVertical: 26,
+    paddingHorizontal: 16,
     marginTop: 100,
     marginHorizontal: 24,
     backgroundColor: "#72063c",
     borderRadius: 8,
-    elevation: 14, // Android only
+    justifyContent: "center",
+    alignItems: "center",
 
-    /* IOS, the four below */
+    /* Android */
+    elevation: 14,
+    /* End Android */
+
+    /* IOS*/
     shadowColor: "black",
     shadowOffset: { width: 12, height: 18 },
     shadowRadius: 15,
     shadowOpacity: 0.5,
     /* End IOS */
+  },
 
-    justifyContent: "center",
-    alignItems: "center",
+  labelContainer: {
+    position: "absolute", // Needed to be able to precisely overlap label with border
+    top: 25, // Vertical position of label. Eyeball it to see where label intersects border.
+    left: 45,
+    backgroundColor: "#72063c",
+    paddingHorizontal: 8,
+    marginStart: 13,
+    // borderBottomWidth: 0,
+    elevation: 1, // Needed for android
+    alignSelf: "flex-start", // Have View be same width as Text inside
+    zIndex: 1, // Label must overlap border
+    // shadowColor: "white", // Same as background color because elevation: 1 creates a shadow that we don't want
+  },
+
+  labelText: {
+    color: "#fff",
+    fontSize: 15,
   },
 
   numberInput: {
-    height: 50,
+    height: 60,
     fontSize: 32,
-    borderBottomColor: "#ddb52f",
-    borderBottomWidth: 2,
+    borderColor: "#dda02fa7",
+    borderRadius: 7,
+    borderWidth: 2,
     color: "#ddb52f",
     marginVertical: 10,
     fontWeight: "bold",
-    width: 50,
+    width: 250,
     textAlign: "center",
   },
 
-  buttonContainer: {
+  buttonsContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

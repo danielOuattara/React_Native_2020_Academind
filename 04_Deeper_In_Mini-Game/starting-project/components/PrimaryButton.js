@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Pressable, Platform } from "react-native";
-import React from "react";
+// import React from "react";
 
 export default function PrimaryButton(props) {
   return (
@@ -10,7 +10,7 @@ export default function PrimaryButton(props) {
           Platform.OS === "ios"
             ? ({ pressed }) =>
                 pressed
-                  ? [styles.pressed, styles.buttonInnerContainer]
+                  ? [styles.btnPressed, styles.buttonInnerContainer]
                   : styles.buttonInnerContainer
             : styles.buttonInnerContainer
         }
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
 
   /* IOS  */
-  pressed: {
+  btnPressed: {
     opacity: 0.75,
   },
 });
