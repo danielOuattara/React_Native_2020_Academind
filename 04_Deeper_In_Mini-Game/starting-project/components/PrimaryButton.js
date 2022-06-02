@@ -14,6 +14,7 @@ export default function PrimaryButton(props) {
                   : styles.buttonInnerContainer
             : styles.buttonInnerContainer
         }
+        onPress={() => props.setEnteredNumber("")}
       >
         <Text style={styles.buttonText}>{props.children}</Text>
       </Pressable>
