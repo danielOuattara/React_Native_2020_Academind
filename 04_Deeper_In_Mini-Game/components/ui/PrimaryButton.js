@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Pressable, Platform } from "react-native";
 // import React from "react";
-import { Colors } from "../constants";
+import { Colors } from "../../constants";
 
 export default function PrimaryButton(props) {
   return (
