@@ -1,13 +1,35 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { useState } from "react";
 import { PrimaryButton } from "../components";
 
-export default function StartGameScreen() {
+export default function StartGameScreen(props) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   const resetInput = () => setEnteredNumber("");
 
-  const confirmInputHandler = () => {};
+  const confirmInputHandler = () => {
+    let userInput = Number(enteredNumber);
+    if (!userInput) {
+      Alert.alert("ERROR", "Cannot be empty, Type in integer only", [
+        {
+          text: "Agree",
+          style: "destructive",
+          onPress: () => resetInput(),
+        },
+      ]);
+    } else if (!Number.isInteger(userInput) || userInput < 0 || !userInput) {
+      Alert.alert("ERROR", "Type in integer only", [
+        {
+          text: "Agree",
+          style: "destructive",
+          onPress: () => resetInput(),
+        },
+      ]);
+    } else {
+      props.confirmUserNumber(enteredNumber);
+      console.log(`Your input is correct, let's continue`);
+    }
+  };
 
   return (
     <View style={styles.inputContainer}>
@@ -19,20 +41,15 @@ export default function StartGameScreen() {
         maxLength={2}
         keyboardType="number-pad"
         value={enteredNumber}
-        onChangeText={(input) => setEnteredNumber(input)}
-        // onChange={(e) => setEnteredNumber(e.target.value)} // Option of above
+        onChangeText={(userInput) => setEnteredNumber(userInput)}
       />
 
       <View style={styles.buttonsContainer}>
         <View style={styles.singleButtonContainer}>
-          <PrimaryButton onPressHandler={setEnteredNumber}>
-            Reset
-          </PrimaryButton>
+          <PrimaryButton onPressAction={resetInput}>Reset</PrimaryButton>
         </View>
         <View style={styles.singleButtonContainer}>
-          <PrimaryButton onPressHandler={confirmInputHandler}>
-            Confirm
-          </PrimaryButton>
+          <PrimaryButton onPressAction={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
