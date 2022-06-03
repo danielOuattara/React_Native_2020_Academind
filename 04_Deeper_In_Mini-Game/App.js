@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { StartGameScreen, GameScreen } from "./screens";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -19,7 +19,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        {screenToLoad}
+        <SafeAreaView style={{ flex: 1 }}>{screenToLoad}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );

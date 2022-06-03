@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { useState } from "react";
 import { PrimaryButton } from "../components";
+import { Colors } from "../constants";
 
 export default function StartGameScreen(props) {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -27,7 +28,6 @@ export default function StartGameScreen(props) {
       ]);
     } else {
       props.confirmUserNumber(enteredNumber);
-      console.log(`Your input is correct, let's continue`);
     }
   };
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginTop: 100,
     marginHorizontal: 24,
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary500,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     position: "absolute", // Needed to be able to precisely overlap label with border
     top: 25, // Vertical position of label. Eyeball it to see where label intersects border.
     left: 45,
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary500,
     paddingHorizontal: 8,
     marginStart: 13,
     // borderBottomWidth: 0,
@@ -101,10 +101,10 @@ const styles = StyleSheet.create({
   numberInput: {
     height: 60,
     fontSize: 32,
-    borderColor: "#dda02fa7",
+    borderColor: Colors.secondary600,
     borderRadius: 7,
     borderWidth: 2,
-    color: "#ddb52f",
+    color: Colors.secondary500,
     marginVertical: 10,
     fontWeight: "bold",
     width: 250,
