@@ -4,13 +4,13 @@ import { PrimaryButton } from "../components";
 import { Colors } from "../constants";
 
 export default function StartGameScreen(props) {
-  const [enteredNumber, setEnteredNumber] = useState("");
+  const [playerNumber, setPlayerNumber] = useState("");
 
-  const resetInput = () => setEnteredNumber("");
+  const resetInput = () => setPlayerNumber("");
 
   const confirmInputHandler = () => {
-    let userInput = Number(enteredNumber);
-    if (!userInput) {
+    let playerInput = Number(playerNumber);
+    if (!playerInput) {
       Alert.alert("ERROR", "Cannot be empty, Type in integer only", [
         {
           text: "Agree",
@@ -18,7 +18,7 @@ export default function StartGameScreen(props) {
           onPress: () => resetInput(),
         },
       ]);
-    } else if (!Number.isInteger(userInput) || userInput < 0 || !userInput) {
+    } else if (!Number.isInteger(playerInput) || playerInput < 0) {
       Alert.alert("ERROR", "Type in integer only", [
         {
           text: "Agree",
@@ -27,7 +27,7 @@ export default function StartGameScreen(props) {
         },
       ]);
     } else {
-      props.confirmUserNumber(enteredNumber);
+      props.confirmUserNumber(playerNumber);
     }
   };
 
@@ -40,8 +40,8 @@ export default function StartGameScreen(props) {
         style={styles.numberInput}
         maxLength={2}
         keyboardType="number-pad"
-        value={enteredNumber}
-        onChangeText={(userInput) => setEnteredNumber(userInput)}
+        value={playerNumber}
+        onChangeText={(playerInput) => setPlayerNumber(playerInput)}
       />
 
       <View style={styles.buttonsContainer}>
