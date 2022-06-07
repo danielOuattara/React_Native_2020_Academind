@@ -10,7 +10,7 @@ export default function StartGameScreen(props) {
 
   const confirmInputHandler = () => {
     let playerInput = Number(playerNumber);
-    if (!playerInput) {
+    if (playerInput === " ") {
       Alert.alert("ERROR", "Cannot be empty, Type in integer only", [
         {
           text: "Agree",

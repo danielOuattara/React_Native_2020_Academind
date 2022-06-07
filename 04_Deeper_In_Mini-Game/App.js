@@ -7,13 +7,18 @@ import { LinearGradient } from "expo-linear-gradient";
 export default function App() {
   // Tips for switching between screens
   const [userNumber, setUserNumber] = useState();
-  const [computerWon, setComputerWon] = useState(false);
+  const [gameIsOver, setGameIsOver] = useState(true);
+
+  const terminateGame = () => {
+    setGameIsOver(true);
+  };
 
   let screenToLoad = <StartGameScreen confirmUserNumber={setUserNumber} />;
-  if (userNumber && !computerWon) {
-    screenToLoad = <GameScreen userNumber={userNumber} setComputerWon={setComputerWon} />;
-  }
-  if (computerWon) {
+  if (userNumber && gameIsOver) {
+    screenToLoad = (
+      <GameScreen userNumber={userNumber} terminateGame={terminateGame} />
+    );
+  } else if (!gameIsOver) {
     screenToLoad = <GameOverScreen />;
   }
 

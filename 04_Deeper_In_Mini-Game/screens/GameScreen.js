@@ -4,64 +4,52 @@ import React from "react";
 import { Title, ComputerGuess, PrimaryButton } from "../components";
 
 export default function GameScreen(props) {
-  console.log("=================================");
-  const [counter, setCounter] = useState(0);
-  // const [min, setMin] = useState(0);
-  // const [max, setMax] = useState(100);
-  let min = 1;
-  let max = 99;
+  const [counter, setCounter] = useState(1);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(99);
 
-  function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
-
-  const [currentGuess, setCurrentGuess] = useState(getRndInteger(min, max));
-
-  useEffect(() => {
-    setCounter((counter) => counter + 1);
-  }, [currentGuess]);
-
-  useEffect(() => {
-    if (currentGuess === props.userNumber) {
-      () => props.setComputerWon(true);
+  // --> generate random number between min and max included
+  const generateRandomBetween = (min, max, exclude) => {
+    let ranNum = Math.floor(Math.random() * (max - min)) + min;
+    if (ranNum === exclude) {
+      ranNum = generateRandomBetween(min, max, exclude);
     }
-  }, [currentGuess]);
+    return ranNum;
+  };
 
-  console.log(props.userNumber);
-  // check if computer won: send back computerWon = true to App.js
+  const initialGuess = generateRandomBetween(min, max, null);
+  const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   function nextGuessHandler(suggestion) {
-    if (currentGuess < min || currentGuess > max) {
+    if (
+      (suggestion === "less" && currentGuess < props.userNumber) ||
+      (suggestion === "more" && currentGuess > props.userNumber)
+    ) {
+      // checks user honesty
       console.log("Something went wrong !");
-      return Alert.alert("ERROR", "Don't lie ! Game restart.", [
-        {
-          text: "Agree",
-          style: "destructive",
-          onPress: () => {
-            setCounter(0);
-            min = 0;
-            max = 100;
-            setCurrentGuess(() => getRndInteger(min, max));
-          },
-        },
-      ]);
-    }
-
-    // 'lower' OR 'greater'
-    else if (suggestion === "less") {
-      // setMax(() => currentGuess);
-      max = currentGuess;
-      // setCurrentGuess(() => getRndInteger(min, max));
+      return Alert.alert("ERROR", "Don't lie ! Game continue");
+    } else if (suggestion === "less") {
+      setMax((previousMax) => (previousMax = currentGuess));
     } else if (suggestion === "more") {
-      // setMin(() => currentGuess);
-      min = currentGuess;
+      setMin((previousMin) => (previousMin = currentGuess));
     }
-    setCurrentGuess(() => getRndInteger(min, max));
+    setCounter((counter) => counter + 1);
   }
 
-  console.log("Counter = ", counter);
-  console.log("new min = ", min, ",", "new max = ", max);
-  console.log("new guess: ", currentGuess);
+  useEffect(() => {
+    // game over
+    if (currentGuess === props.userNumber) {
+      props.terminateGame();
+    }
+  }, [currentGuess, props.userNumber, props.terminateGame]);
+
+  useEffect(() => {
+    if (currentGuess !== props.userNumber) {
+      const newRndNumber = generateRandomBetween(min, max, currentGuess);
+      setCurrentGuess((currentGuess) => (currentGuess = newRndNumber));
+    }
+  }, [counter]);
+
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
@@ -69,8 +57,12 @@ export default function GameScreen(props) {
       <View>
         <Text> Higher or Lower ? + -</Text>
         <View style={styles.btnContainer}>
-          <PrimaryButton onPressAction={() => nextGuessHandler("less")}>-</PrimaryButton>
-          <PrimaryButton onPressAction={() => nextGuessHandler("more")}>+</PrimaryButton>
+          <PrimaryButton onPressAction={() => nextGuessHandler("less")}>
+            -
+          </PrimaryButton>
+          <PrimaryButton onPressAction={() => nextGuessHandler("more")}>
+            +
+          </PrimaryButton>
         </View>
       </View>
       <View>
