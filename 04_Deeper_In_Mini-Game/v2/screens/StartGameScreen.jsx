@@ -3,12 +3,19 @@ import { PrimaryButton } from "../components";
 
 export default function StartGameScreen() {
   return (
-    <View>
-      <TextInput placeholder="Enter a number to guess" />
+    <View style={styles.inputContainer}>
+      <TextInput />
       <PrimaryButton>Reset</PrimaryButton>
       <PrimaryButton>Confirm</PrimaryButton>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  inputContainer: {
+    flex: 1,
+    marginTop: 100,
+    padding: 16,
+    backgroundColor: "#72063C",
+  },
+});
