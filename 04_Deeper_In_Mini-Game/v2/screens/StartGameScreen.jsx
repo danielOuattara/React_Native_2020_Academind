@@ -13,9 +13,21 @@ export default function StartGameScreen() {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flex: 1,
+    // flex: 1,
     marginTop: 100,
+    marginHorizontal: 24,
     padding: 16,
     backgroundColor: "#72063C",
+    borderRadius: 8,
+    /* Android */
+    elevation: 4,
+    /* End Android */
+
+    /* IOS*/
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.5,
+    /* End IOS */
   },
 });
