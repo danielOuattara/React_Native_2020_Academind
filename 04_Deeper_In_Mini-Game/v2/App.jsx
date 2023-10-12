@@ -1,13 +1,18 @@
 // import { StatusBar } from "expo-status-bar";
 import { StyleSheet, ImageBackground } from "react-native";
-import { StartGameScreen } from "./screens";
+import { StartGameScreen, GameScreen } from "./screens";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 
 export default function App() {
-  // const [userNumber, setUserNumber] = useState("");
+  const [userNumber, setUserNumber] = useState("");
   // const [gameIsOver, setGameIsOver] = useState(true);
 
+  let screenToLoad = <StartGameScreen setUserNumber={setUserNumber} />;
+
+  if (userNumber) {
+    screenToLoad = <GameScreen />;
+  }
   return (
     <LinearGradient colors={["#72063C", "#ddb52f"]} style={styles.rootScreen}>
       <ImageBackground
@@ -16,7 +21,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        <StartGameScreen />
+        {screenToLoad}
       </ImageBackground>
     </LinearGradient>
   );

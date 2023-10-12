@@ -2,7 +2,8 @@ import { StyleSheet, TextInput, View, Alert } from "react-native";
 import { PrimaryButton } from "../components";
 import { useState } from "react";
 
-export default function StartGameScreen() {
+export default function StartGameScreen(props) {
+  console.log(props);
   const [playerNumber, setPlayerNumber] = useState("");
 
   const resetPlayerNumber = () => setPlayerNumber("");
@@ -11,7 +12,7 @@ export default function StartGameScreen() {
     let playerInput = parseInt(playerNumber);
 
     if (isNaN(playerInput) || playerInput < 0 || playerNumber > 99) {
-      Alert.alert(
+      return Alert.alert(
         "ERROR",
         "Cannot be empty ! \nOnly integer value between 1 and 99.",
         [
@@ -23,7 +24,7 @@ export default function StartGameScreen() {
         ],
       );
     } else {
-      // props.confirmUserNumber(playerNumber);
+      return props.setUserNumber(playerNumber);
     }
   };
 
