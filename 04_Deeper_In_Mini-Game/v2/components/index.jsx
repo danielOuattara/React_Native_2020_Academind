@@ -1,5 +1,5 @@
-import PrimaryButton from "./PrimaryButton";
+import ComputerGuess from "./game/ComputerGuess";
+import PrimaryButton from "./ui/PrimaryButton";
 import Title from "./Title";
 
-
-export { PrimaryButton, Title };
+export { ComputerGuess, PrimaryButton, Title };
