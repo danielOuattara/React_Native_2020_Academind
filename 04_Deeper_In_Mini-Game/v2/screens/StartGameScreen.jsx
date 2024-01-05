@@ -42,7 +42,7 @@ export default function StartGameScreen(props) {
           value={playerNumber}
           onChangeText={(input) => setPlayerNumber(input)}
         />
-        <View style={styles.btnContainer}>
+        <View style={styles.buttonsContainer}>
           <View style={styles.singleButtonContainer}>
             <PrimaryButton pressAction={() => setPlayerNumber("")}>
               Reset
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  btnContainer: {
+  buttonsContainer: {
     flexDirection: "row",
   },
 

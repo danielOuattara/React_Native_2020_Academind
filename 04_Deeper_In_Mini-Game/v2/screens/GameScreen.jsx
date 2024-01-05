@@ -60,14 +60,20 @@ export default function GameScreen(props) {
       <Title>Opponent's guess</Title>
       <ComputerGuess>{currentGuess}</ComputerGuess>
       <Card>
-        <Instructions>Lower ? &nbsp; | &nbsp; Higher ?</Instructions>
-        <View style={styles.controlBtnContainer}>
-          <PrimaryButton pressAction={() => nextGuessHandler("less")}>
-            -
-          </PrimaryButton>
-          <PrimaryButton pressAction={() => nextGuessHandler("more")}>
-            +
-          </PrimaryButton>
+        <Instructions style={styles.instructionAdditional}>
+          Is it Lower or Higher ?
+        </Instructions>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.singleButtonContainer}>
+            <PrimaryButton pressAction={() => nextGuessHandler("less")}>
+              Lower
+            </PrimaryButton>
+          </View>
+          <View style={styles.singleButtonContainer}>
+            <PrimaryButton pressAction={() => nextGuessHandler("more")}>
+              Higher
+            </PrimaryButton>
+          </View>
         </View>
       </Card>
     </View>
@@ -80,12 +86,14 @@ const styles = StyleSheet.create({
     padding: 30,
   },
 
-  instruction: {
-    fontSize: 20,
-    color: Colors.secondary500,
-  },
-  controlBtnContainer: {
+  instructionAdditional: { marginVertical: 16 },
+
+  buttonsContainer: {
     flexDirection: "row",
     justifyContent: "center",
+  },
+
+  singleButtonContainer: {
+    flex: 1,
   },
 });
