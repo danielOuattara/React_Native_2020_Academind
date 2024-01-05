@@ -5,18 +5,20 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { Colors } from "./constants";
 
-
 export default function App() {
   const [userNumber, setUserNumber] = useState("");
+
   // const [gameIsOver, setGameIsOver] = useState(true);
-
   let screenToLoad = <StartGameScreen setUserNumber={setUserNumber} />;
-
   if (userNumber) {
-    screenToLoad = <GameScreen />;
+    screenToLoad = <GameScreen userNumber={userNumber} />;
   }
+
   return (
-    <LinearGradient colors={[Colors.primary500, Colors.secondary500]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.primary500, Colors.secondary500]}
+      style={styles.rootScreen}
+    >
       <ImageBackground
         source={require("./assets/images/background.png")}
         resizeMode="cover"

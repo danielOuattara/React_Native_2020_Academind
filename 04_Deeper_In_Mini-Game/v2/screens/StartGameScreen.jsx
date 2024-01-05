@@ -4,15 +4,14 @@ import { useState } from "react";
 import { Colors } from "../constants";
 
 export default function StartGameScreen(props) {
-  console.log(props);
   const [playerNumber, setPlayerNumber] = useState("");
 
-  const resetPlayerNumber = () => setPlayerNumber("");
-
   const checkPlayerNumberInput = () => {
-    let playerInput = parseInt(playerNumber);
-
-    if (isNaN(playerInput) || playerInput < 0 || playerNumber > 99) {
+    if (
+      isNaN(parseInt(playerNumber)) ||
+      parseInt(playerNumber) < 0 ||
+      parseInt(playerNumber) > 99
+    ) {
       return Alert.alert(
         "ERROR",
         "Cannot be empty ! \nOnly integer value between 1 and 99.",
@@ -20,7 +19,7 @@ export default function StartGameScreen(props) {
           {
             text: "Agree",
             style: "destructive",
-            onPress: () => resetPlayerNumber(),
+            onPress: () => setPlayerNumber(""),
           },
         ],
       );
@@ -38,11 +37,13 @@ export default function StartGameScreen(props) {
         autoCapitalize="none"
         autoCorrect={false}
         value={playerNumber}
-        onChangeText={(playerInput) => setPlayerNumber(playerInput)}
+        onChangeText={(input) => setPlayerNumber(input)}
       />
       <View style={styles.btnContainer}>
         <View style={styles.singleButtonContainer}>
-          <PrimaryButton pressAction={resetPlayerNumber}>Reset</PrimaryButton>
+          <PrimaryButton pressAction={() => setPlayerNumber("")}>
+            Reset
+          </PrimaryButton>
         </View>
         <View style={styles.singleButtonContainer}>
           <PrimaryButton pressAction={checkPlayerNumberInput}>
@@ -65,14 +66,12 @@ const styles = StyleSheet.create({
     /* Android */
     elevation: 4,
     /* End Android */
-
     /* IOS*/
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.5,
     /* End IOS */
-
     alignItems: "center",
   },
 

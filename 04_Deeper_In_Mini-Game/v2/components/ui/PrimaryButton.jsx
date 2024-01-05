@@ -6,9 +6,11 @@ export default function PrimaryButton(props) {
     <View style={styles.btnOuterContainer}>
       <Pressable
         style={({ pressed }) =>
-          pressed ? [styles.pressed, styles.pressed] : styles.btnInnerContainer
+          pressed
+            ? [styles.pressed, styles.btnInnerContainer]
+            : styles.btnInnerContainer
         }
-        onPress={props.pressAction}
+        onPress={() => props.pressAction()}
         android_ripple={{ color: Colors.primary600 }}
       >
         <Text style={styles.btnText}>{props.children}</Text>
