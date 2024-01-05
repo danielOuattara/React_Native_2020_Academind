@@ -16,7 +16,7 @@ export default function App() {
   });
 
   const [userNumber, setUserNumber] = useState(undefined);
-  const [gameIsOver, setGameIsOver] = useState(false);
+  const [gameIsOver, setGameIsOver] = useState(true);
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
