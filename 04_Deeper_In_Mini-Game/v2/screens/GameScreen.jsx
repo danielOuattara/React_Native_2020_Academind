@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Alert } from "react-native";
 import { Title, ComputerGuess, PrimaryButton } from "../components";
+import { Colors } from "./../constants";
 
+//----
 const generateRandomBetween = (min, max, exclude) => {
   /*
-   * this function generate a random number between min and max included
+   * this function generate a random number between min included and max excluded
    * exclude: to avoid that the computer could guess the correct number on 1st launch
    **/
   let randNum = Math.floor(Math.random() * (max - min)) + min;
@@ -39,7 +41,7 @@ export default function GameScreen(props) {
     }
 
     if (suggestion === "less") {
-      maxBound = currentGuess;
+      maxBound = currentGuess - 1;
     } else if (suggestion === "more") {
       minBound = currentGuess + 1;
     }
@@ -56,10 +58,10 @@ export default function GameScreen(props) {
 
   return (
     <View style={styles.screen}>
-      <Title>GameScreen</Title>
+      <Title>Opponent's guess</Title>
       <ComputerGuess>{currentGuess}</ComputerGuess>
-      <View>
-        <Text>Higher OR Lower ?</Text>
+      <View style={styles.container}>
+        <Text style={styles.instruction}>Lower ? &nbsp; | &nbsp; Higher ?</Text>
         <View style={styles.controlBtnContainer}>
           <PrimaryButton pressAction={() => nextGuessHandler("less")}>
             -
@@ -81,7 +83,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
   },
+  container: {
+    alignItems: "center",
+    textAlign: "center",
+  },
+  instruction: {
+    fontSize: 20,
+    color: Colors.secondary500,
+  },
   controlBtnContainer: {
     flexDirection: "row",
+    justifyContent: "center",
   },
 });
