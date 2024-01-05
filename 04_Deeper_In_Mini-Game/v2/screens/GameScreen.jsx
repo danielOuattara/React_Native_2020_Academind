@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import {
   Card,
   ComputerGuess,
@@ -7,8 +7,7 @@ import {
   PrimaryButton,
   Title,
 } from "../components";
-import { Colors } from "./../constants";
-
+import { Ionicons } from "@expo/vector-icons";
 //----
 const generateRandomBetween = (min, max, exclude) => {
   /*
@@ -66,12 +65,12 @@ export default function GameScreen(props) {
         <View style={styles.buttonsContainer}>
           <View style={styles.singleButtonContainer}>
             <PrimaryButton pressAction={() => nextGuessHandler("less")}>
-              Lower
+              Lower <Ionicons name="md-remove" />
             </PrimaryButton>
           </View>
           <View style={styles.singleButtonContainer}>
             <PrimaryButton pressAction={() => nextGuessHandler("more")}>
-              Higher
+              Higher <Ionicons name="md-add" />
             </PrimaryButton>
           </View>
         </View>
