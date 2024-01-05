@@ -8,8 +8,8 @@ export default function Title(props) {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: "open-sans-bold",
     fontSize: 20,
-    fontWeight: "bold",
     color: Colors.secondary500,
     textAlign: "center",
     borderWidth: 2,

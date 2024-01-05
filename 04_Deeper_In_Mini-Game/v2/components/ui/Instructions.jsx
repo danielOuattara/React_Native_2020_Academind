@@ -13,5 +13,6 @@ const styles = StyleSheet.create({
   instructions: {
     color: Colors.secondary500,
     fontSize: 18,
+    fontFamily: "open-sans-regular",
   },
 });
