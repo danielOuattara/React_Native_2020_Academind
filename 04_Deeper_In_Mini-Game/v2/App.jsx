@@ -1,17 +1,23 @@
 // import { StatusBar } from "expo-status-bar";
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
-import { StartGameScreen, GameScreen } from "./screens";
+import { StartGameScreen, GameScreen, GameOverScreen } from "./screens";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { Colors } from "./constants";
 
 export default function App() {
-  const [userNumber, setUserNumber] = useState("");
+  const [userNumber, setUserNumber] = useState(undefined);
+  const [gameIsOver, setGameIsOver] = useState(false);
 
-  // const [gameIsOver, setGameIsOver] = useState(true);
   let screenToLoad = <StartGameScreen setUserNumber={setUserNumber} />;
   if (userNumber) {
-    screenToLoad = <GameScreen userNumber={userNumber} />;
+    screenToLoad = (
+      <GameScreen userNumber={userNumber} setGameIsOver={setGameIsOver} />
+    );
+  }
+
+  if (gameIsOver) {
+    screenToLoad = <GameOverScreen />;
   }
 
   return (

@@ -24,7 +24,7 @@ export default function StartGameScreen(props) {
         ],
       );
     } else {
-      return props.setUserNumber(playerNumber);
+      return props.setUserNumber(parseInt(playerNumber));
     }
   };
 

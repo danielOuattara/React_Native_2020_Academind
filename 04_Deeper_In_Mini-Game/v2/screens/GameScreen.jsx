@@ -9,8 +9,8 @@ const generateRandomBetween = (min, max, exclude) => {
    * this function generate a random number between min included and max excluded
    * exclude: to avoid that the computer could guess the correct number on 1st launch
    **/
-  let randNum = Math.floor(Math.random() * (max - min)) + min;
 
+  let randNum = Math.floor(Math.random() * (max - min)) + min;
   if (randNum === exclude) {
     return generateRandomBetween(min, max, exclude);
   }
@@ -23,11 +23,7 @@ let maxBound = 100;
 export default function GameScreen(props) {
   const [counter, setCounter] = useState(1);
 
-  const initialGuess = generateRandomBetween(
-    minBound,
-    maxBound,
-    props.userNumber,
-  );
+  const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
@@ -49,6 +45,13 @@ export default function GameScreen(props) {
     setCurrentGuess(newRandNum);
     setCounter(counter + 1);
   };
+
+  useEffect(() => {
+    if (currentGuess === props.userNumber) {
+      props.setGameIsOver(true);
+    }
+  }, [currentGuess]);
+
   // console.log("counter = ", counter);
   // console.log("minBound = ", minBound);
   // console.log("maxBound = ", maxBound);
