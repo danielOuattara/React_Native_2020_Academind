@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, Text } from "react-native";
 import {
   Card,
   ComputerGuess,
@@ -8,6 +8,7 @@ import {
   Title,
 } from "../components";
 import { Ionicons } from "@expo/vector-icons";
+
 //----
 const generateRandomBetween = (min, max, exclude) => {
   /*
@@ -16,7 +17,7 @@ const generateRandomBetween = (min, max, exclude) => {
    **/
 
   let randNum = Math.floor(Math.random() * (max - min)) + min;
-  if (randNum === exclude) {
+  if (randNum == exclude) {
     return generateRandomBetween(min, max, exclude);
   }
   return randNum;
@@ -27,7 +28,7 @@ let maxBound = 100;
 
 export default function GameScreen(props) {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
-  const [counter, setCounter] = useState(1);
+
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   const nextGuessHandler = (suggestion) => {
@@ -45,19 +46,25 @@ export default function GameScreen(props) {
     }
     const newRandNum = generateRandomBetween(minBound, maxBound, currentGuess);
     setCurrentGuess(newRandNum);
-    setCounter(counter + 1);
   };
 
   useEffect(() => {
     if (currentGuess === props.userNumber) {
       props.setGameIsOver(true);
+      minBound = 1;
+      maxBound = 100;
     }
+  }, [currentGuess]);
+
+  useEffect(() => {
+    props.setCounter((prevState) => prevState + 1);
   }, [currentGuess]);
 
   return (
     <View style={styles.screen}>
       <Title>Opponent's guess</Title>
       <ComputerGuess>{currentGuess}</ComputerGuess>
+      <Text>{props.counter}</Text>
       <Card>
         <Instructions style={styles.instructionAdditional}>
           Is it Lower or Higher ?

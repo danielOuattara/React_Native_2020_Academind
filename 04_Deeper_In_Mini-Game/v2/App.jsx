@@ -16,7 +16,14 @@ export default function App() {
   });
 
   const [userNumber, setUserNumber] = useState(undefined);
-  const [gameIsOver, setGameIsOver] = useState(true);
+  const [gameIsOver, setGameIsOver] = useState(false);
+  const [counter, setCounter] = useState(0);
+
+  const startNewGame = () => {
+    setCounter(0);
+    setGameIsOver(false);
+    setUserNumber(undefined);
+  };
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -31,12 +38,23 @@ export default function App() {
   let screenToLoad = <StartGameScreen setUserNumber={setUserNumber} />;
   if (userNumber) {
     screenToLoad = (
-      <GameScreen userNumber={userNumber} setGameIsOver={setGameIsOver} />
+      <GameScreen
+        userNumber={userNumber}
+        setCounter={setCounter}
+        counter={counter}
+        setGameIsOver={setGameIsOver}
+      />
     );
   }
 
   if (gameIsOver) {
-    screenToLoad = <GameOverScreen />;
+    screenToLoad = (
+      <GameOverScreen
+        counter={counter}
+        userNumber={userNumber}
+        startNewGame={startNewGame}
+      />
+    );
   }
 
   return (
