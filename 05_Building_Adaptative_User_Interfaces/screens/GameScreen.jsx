@@ -9,20 +9,7 @@ import {
 } from "../components";
 import { Ionicons } from "@expo/vector-icons";
 import LogGuessesItems from "../components/game/LogGuessesItems";
-
-//----
-const generateRandomBetween = (min, max, exclude) => {
-  /*
-   * this function generate a random number between min included and max excluded
-   * exclude: to avoid that the computer could guess the correct number on 1st launch
-   **/
-
-  let randNum = Math.floor(Math.random() * (max - min)) + min;
-  if (randNum == exclude) {
-    return generateRandomBetween(min, max, exclude);
-  }
-  return randNum;
-};
+import { generateRandomBetween } from "../utils/generateRandomBetween";
 
 let minBound = 1;
 let maxBound = 100;
@@ -102,6 +89,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 30,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "red",
   },
 
   instructionAdditional: { marginVertical: 16 },

@@ -11,9 +11,9 @@ export default function ComputerGuess(props) {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 4,
+    borderWidth: 2,
     borderColor: Colors.secondary500,
-    padding: 24,
+    padding: 20,
     borderRadius: 8,
     margin: 24,
     alignItems: "center",

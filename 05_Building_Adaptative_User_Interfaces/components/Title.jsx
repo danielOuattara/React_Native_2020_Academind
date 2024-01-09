@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text } from "react-native";
 import { Colors } from "../constants";
 
 export default function Title(props) {
@@ -16,5 +15,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.secondary500,
     padding: 12,
     borderRadius: 6,
+    maxWidth: "80%",
   },
 });
