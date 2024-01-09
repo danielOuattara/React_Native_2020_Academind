@@ -8,6 +8,7 @@ import {
   Title,
 } from "../components";
 import { Ionicons } from "@expo/vector-icons";
+import LogGuessesItems from "../components/game/LogGuessesItems";
 
 //----
 const generateRandomBetween = (min, max, exclude) => {
@@ -84,10 +85,12 @@ export default function GameScreen(props) {
           </View>
         </View>
       </Card>
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={logGuesses}
-          renderItem={({ item }) => <Text>{item}</Text>}
+          renderItem={({ item, index }) => (
+            <LogGuessesItems position={logGuesses.length - index} item={item} />
+          )}
           keyExtractor={(item) => item}
         />
       </View>
@@ -109,6 +112,10 @@ const styles = StyleSheet.create({
   },
 
   singleButtonContainer: {
+    flex: 1,
+  },
+
+  listContainer: {
     flex: 1,
   },
 });
