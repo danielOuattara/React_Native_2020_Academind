@@ -54,7 +54,7 @@ export default function GameScreen(props) {
     <View style={styles.screen}>
       <Title>Opponent's guess</Title>
       <ComputerGuess>{currentGuess}</ComputerGuess>
-      <Text>{props.counter}</Text>
+
       <Card>
         <Instructions style={styles.instructionAdditional}>
           Is it Lower or Higher ?
@@ -90,8 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "red",
   },
 
   instructionAdditional: { marginVertical: 16 },
