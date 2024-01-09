@@ -5,6 +5,8 @@ import {
   Alert,
   // Dimensions,
   useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import { PrimaryButton, Title, Card, Instructions } from "../components";
 import { useState } from "react";
@@ -39,33 +41,37 @@ export default function StartGameScreen(props) {
   const marginTopDistance = height < 400 ? 40 : 100;
 
   return (
-    <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
-      <Title>Guess my number</Title>
-      <Card>
-        <Instructions>Enter a number</Instructions>
-        <TextInput
-          style={styles.numberInput}
-          maxLength={2}
-          keyboardType="number-pad"
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={playerNumber}
-          onChangeText={(input) => setPlayerNumber(input)}
-        />
-        <View style={styles.buttonsContainer}>
-          <View style={styles.singleButtonContainer}>
-            <PrimaryButton pressAction={() => setPlayerNumber("")}>
-              Reset
-            </PrimaryButton>
-          </View>
-          <View style={styles.singleButtonContainer}>
-            <PrimaryButton pressAction={checkPlayerNumberInput}>
-              Confirm
-            </PrimaryButton>
-          </View>
+    <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+          <Title>Guess my number</Title>
+          <Card>
+            <Instructions>Enter a number</Instructions>
+            <TextInput
+              style={styles.numberInput}
+              maxLength={2}
+              keyboardType="number-pad"
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={playerNumber}
+              onChangeText={(input) => setPlayerNumber(input)}
+            />
+            <View style={styles.buttonsContainer}>
+              <View style={styles.singleButtonContainer}>
+                <PrimaryButton pressAction={() => setPlayerNumber("")}>
+                  Reset
+                </PrimaryButton>
+              </View>
+              <View style={styles.singleButtonContainer}>
+                <PrimaryButton pressAction={checkPlayerNumberInput}>
+                  Confirm
+                </PrimaryButton>
+              </View>
+            </View>
+          </Card>
         </View>
-      </Card>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
@@ -73,6 +79,9 @@ export default function StartGameScreen(props) {
 // console.log(deviceHeight);
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
     // marginTop: deviceHeight < 340 ? 20 : 40,
