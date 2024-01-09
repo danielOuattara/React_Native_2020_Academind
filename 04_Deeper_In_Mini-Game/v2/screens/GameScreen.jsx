@@ -30,7 +30,7 @@ export default function GameScreen(props) {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
 
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
-  const [logGuess, setLogGuess] = useState([initialGuess]);
+  const [logGuesses, setLogGuesses] = useState([initialGuess]);
 
   const nextGuessHandler = (suggestion) => {
     if (
@@ -47,7 +47,7 @@ export default function GameScreen(props) {
     }
     const newRandNum = generateRandomBetween(minBound, maxBound, currentGuess);
     setCurrentGuess(newRandNum);
-    setLogGuess((prevState) => [newRandNum, ...prevState]);
+    setLogGuesses((prevState) => [newRandNum, ...prevState]);
   };
 
   useEffect(() => {
@@ -85,9 +85,11 @@ export default function GameScreen(props) {
         </View>
       </Card>
       <View>
-        {logGuess.map((guess) => (
-          <Text key={guess}>{guess}</Text>
-        ))}
+        <FlatList
+          data={logGuesses}
+          renderItem={({ item }) => <Text>{item}</Text>}
+          keyExtractor={(item) => item}
+        />
       </View>
     </View>
   );
