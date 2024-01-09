@@ -9,7 +9,7 @@ export default function StartGameScreen(props) {
   const checkPlayerNumberInput = () => {
     if (
       isNaN(parseInt(playerNumber)) ||
-      parseInt(playerNumber) < 0 ||
+      parseInt(playerNumber) <= 0 ||
       parseInt(playerNumber) > 99
     ) {
       return Alert.alert(
