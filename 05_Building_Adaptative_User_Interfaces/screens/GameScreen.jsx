@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Alert, Text, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  Text,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import {
   Card,
   ComputerGuess,
@@ -16,9 +23,9 @@ let maxBound = 100;
 
 export default function GameScreen(props) {
   const initialGuess = generateRandomBetween(1, 100, props.userNumber);
-
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [logGuesses, setLogGuesses] = useState([initialGuess]);
+  const { width, height } = useWindowDimensions();
 
   const nextGuessHandler = (suggestion) => {
     if (
@@ -50,9 +57,8 @@ export default function GameScreen(props) {
     props.setCounter((prevState) => prevState + 1);
   }, [currentGuess]);
 
-  return (
-    <View style={styles.screen}>
-      <Title>Opponent's guess</Title>
+  let content = (
+    <>
       <ComputerGuess>{currentGuess}</ComputerGuess>
 
       <Card>
@@ -72,6 +78,56 @@ export default function GameScreen(props) {
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <>
+        {/* <Instructions style={styles.instructionAdditional}>
+          Is it Lower or Higher ?
+        </Instructions> */}
+        <View style={styles.buttonContainerWider}>
+          <View style={styles.singleButtonContainer}>
+            <PrimaryButton pressAction={() => nextGuessHandler("less")}>
+              Lower <Ionicons name="md-remove" />
+            </PrimaryButton>
+          </View>
+          <ComputerGuess>{currentGuess}</ComputerGuess>
+          <View style={styles.singleButtonContainer}>
+            <PrimaryButton pressAction={() => nextGuessHandler("more")}>
+              Higher <Ionicons name="md-add" />
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.screen}>
+      <Title>Opponent's guess</Title>
+
+      {/* <ComputerGuess>{currentGuess}</ComputerGuess>
+      <Card>
+        <Instructions style={styles.instructionAdditional}>
+          Is it Lower or Higher ?
+        </Instructions>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.singleButtonContainer}>
+            <PrimaryButton pressAction={() => nextGuessHandler("less")}>
+              Lower <Ionicons name="md-remove" />
+            </PrimaryButton>
+          </View>
+          <View style={styles.singleButtonContainer}>
+            <PrimaryButton pressAction={() => nextGuessHandler("more")}>
+              Higher <Ionicons name="md-add" />
+            </PrimaryButton>
+          </View>
+        </View>
+      </Card> */}
+
+      {content}
       <View style={styles.listContainer}>
         <FlatList
           data={logGuesses}
@@ -106,5 +162,10 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     padding: 20,
+  },
+
+  buttonContainerWider: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
