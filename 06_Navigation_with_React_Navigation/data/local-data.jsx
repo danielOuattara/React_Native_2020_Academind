@@ -1,6 +1,19 @@
 import Category from '../models/category';
 import Meal from '../models/meal';
 
+  {color: "#f5428d33"}
+  {color: "#f5424233"}
+  {color: "#f5a44233"}
+  {color: "#f5d14233"}
+  {color: "#368dff33"}
+  {color: "#41d95d33"}
+  {color: "#9eecff33"}
+  {color: "#b9ffb033"}
+  {color: "#ffc7ff33"}
+  {color: "#47fced33"}
+
+
+
 export const CATEGORIES = [
   new Category('c1', 'Italian', '#f5428d'),
   new Category('c2', 'Quick & Easy', '#f54242'),
